@@ -14,6 +14,7 @@ struct NewTaskView: View {
     @State private var title: String = ""
     @State private var notes: String = ""
     @State private var priority: TaskPriority = .medium
+    @State private var dueDate: Date = Date()
     
     var body: some View {
         NavigationView {
@@ -34,9 +35,14 @@ struct NewTaskView: View {
                     }
                     .pickerStyle(.segmented)
                 }
+                Section(header: Text("Due Date")) {
+                    DatePicker(selection: $dueDate, in: Date()..., displayedComponents: [.date, .hourAndMinute]) {
+                        Text("Due Date")
+                    }
+                }
                 Section {
                     Button("Add Task") {
-                        let newTask = Task(title: self.title, priority: self.priority, completed: false, notes: self.notes)
+                        let newTask = Task(title: self.title, priority: self.priority, completed: false, notes: self.notes, dueDate: self.dueDate)
                         taskList.tasks.append(newTask)
                         presentationMode.wrappedValue.dismiss()
                     }

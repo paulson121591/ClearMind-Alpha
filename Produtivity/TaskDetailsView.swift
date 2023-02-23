@@ -24,6 +24,8 @@ class TaskDetailsViewModel: ObservableObject {
 struct TaskDetailsView: View {
     @ObservedObject var viewModel: TaskDetailsViewModel
 
+    @State private var showingDueDatePicker = false
+
     var body: some View {
         VStack(alignment: .leading) {
             Text("Task Notes")
@@ -34,6 +36,30 @@ struct TaskDetailsView: View {
                 .frame(height: 200)
                 .cornerRadius(8)
                 .padding(.bottom)
+
+            Text("Due Date")
+                .font(.headline)
+
+            Button(action: {
+                showingDueDatePicker = true
+            }, label: {
+                Text(viewModel.task.dueDate == nil ? "Add due date" : DateFormatter.localizedString(from: viewModel.task.dueDate!, dateStyle: .medium, timeStyle: .short))
+            })
+            .padding(.bottom)
+            .sheet(isPresented: $showingDueDatePicker) {
+                DatePicker(
+                    "Due Date",
+                    selection: dueDateBinding,
+                    in: Date()...,
+                    displayedComponents: [.date, .hourAndMinute]
+                )
+                .datePickerStyle(.compact)
+                .labelsHidden()
+                .frame(height: 250)
+                .navigationBarItems(trailing: Button("Done") {
+                    showingDueDatePicker = false
+                })
+            }
 
             Text("Priority")
                 .font(.headline)
@@ -59,4 +85,12 @@ struct TaskDetailsView: View {
             set: { viewModel.task.notes = $0 }
         )
     }
+
+    var dueDateBinding: Binding<Date> {
+        Binding(
+            get: { viewModel.task.dueDate ?? Date() },
+            set: { viewModel.task.dueDate = $0 }
+        )
+    }
+
 }

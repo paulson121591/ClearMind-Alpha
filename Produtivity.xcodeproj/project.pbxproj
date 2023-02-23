@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1068DB7E29A823EE00265671 /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1068DB7D29A823EE00265671 /* TaskCell.swift */; };
 		10C3951429A65A6C00809504 /* ProdutivityApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C3951329A65A6C00809504 /* ProdutivityApp.swift */; };
 		10C3951629A65A6C00809504 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C3951529A65A6C00809504 /* ContentView.swift */; };
 		10C3951829A65A6D00809504 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10C3951729A65A6D00809504 /* Assets.xcassets */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1068DB7D29A823EE00265671 /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
 		10C3951029A65A6C00809504 /* Produtivity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Produtivity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		10C3951329A65A6C00809504 /* ProdutivityApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdutivityApp.swift; sourceTree = "<group>"; };
 		10C3951529A65A6C00809504 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 				10C3954129A65B5200809504 /* NewTaskView.swift */,
 				10C3954329A65CAF00809504 /* TaskListView.swift */,
 				10C3954529A65E6E00809504 /* TaskDetailsView.swift */,
+				1068DB7D29A823EE00265671 /* TaskCell.swift */,
 			);
 			path = Produtivity;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 				10C3954629A65E6E00809504 /* TaskDetailsView.swift in Sources */,
 				10C3954229A65B5200809504 /* NewTaskView.swift in Sources */,
 				10C3951629A65A6C00809504 /* ContentView.swift in Sources */,
+				1068DB7E29A823EE00265671 /* TaskCell.swift in Sources */,
 				10C3953E29A65AB400809504 /* Task.swift in Sources */,
 				10C3951429A65A6C00809504 /* ProdutivityApp.swift in Sources */,
 				10C3954429A65CAF00809504 /* TaskListView.swift in Sources */,
@@ -442,13 +446,14 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = .01;
 				PRODUCT_BUNDLE_IDENTIFIER = ff.Produtivity;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -470,13 +475,14 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = .01;
 				PRODUCT_BUNDLE_IDENTIFIER = ff.Produtivity;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

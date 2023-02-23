@@ -8,7 +8,7 @@ struct TaskListView: View {
         VStack {
             Picker("Sort by", selection: $sortOption) {
                 ForEach(SortOption.allCases, id: \.self) { option in
-                    Text(option.rawValue)
+                    Text(option.rawValue.capitalized) // capitalize the sort option
                 }
             }
             .pickerStyle(.segmented)
@@ -27,7 +27,7 @@ struct TaskListView: View {
                                     }
                                 }
                             Text(task.title)
-                                .foregroundColor(task.completed ? .gray : task.priority.color) // assign text color based on priority
+                                .foregroundColor(task.completed ? .gray : task.priority.color)
                         }
                     }
                     .foregroundColor(task.completed ? .gray : .primary)
@@ -67,6 +67,7 @@ extension TaskPriority {
         }
     }
 }
+
 
 enum SortOption: String, CaseIterable {
     case priority = "Priority"
