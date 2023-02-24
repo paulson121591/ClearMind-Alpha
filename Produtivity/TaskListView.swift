@@ -1,3 +1,5 @@
+
+
 import SwiftUI
 
 struct TaskListView: View {
@@ -8,7 +10,7 @@ struct TaskListView: View {
         VStack {
             Picker("Sort by", selection: $sortOption) {
                 ForEach(SortOption.allCases, id: \.self) { option in
-                    Text(option.rawValue.capitalized) // capitalize the sort option
+                    Text(option.rawValue.capitalized)
                 }
             }
             .pickerStyle(.segmented)
@@ -19,16 +21,7 @@ struct TaskListView: View {
                     NavigationLink(
                         destination: TaskDetailsView(viewModel: TaskDetailsViewModel(task: task, taskList: taskList))
                     ) {
-                        HStack {
-                            Image(systemName: task.completed ? "checkmark.square" : "square")
-                                .onTapGesture {
-                                    if let index = taskList.tasks.firstIndex(where: { $0.id == task.id }) {
-                                        taskList.tasks[index].completed.toggle()
-                                    }
-                                }
-                            Text(task.title)
-                                .foregroundColor(task.completed ? .gray : task.priority.color)
-                        }
+                        TaskCell(task: task, taskList: taskList)
                     }
                     .foregroundColor(task.completed ? .gray : .primary)
                     .onAppear {
@@ -55,18 +48,11 @@ struct TaskListView: View {
     }
 }
 
-extension TaskPriority {
-    var color: Color {
-        switch self {
-        case .low:
-            return .green
-        case .medium:
-            return .orange
-        case .high:
-            return .red
-        }
-    }
-}
+
+
+
+
+
 
 
 enum SortOption: String, CaseIterable {

@@ -47,9 +47,23 @@ class TaskList: ObservableObject {
         saveTasks()
     }
     
+    func updateTask(_ task: Task, completed: Bool) {
+        if let index = tasks.firstIndex(where: { $0.id == task.id }) {
+            tasks[index].completed = completed
+            saveTasks()
+        }
+    }
+    
     func updateTask(_ updatedTask: Task) {
         if let index = tasks.firstIndex(where: { $0.id == updatedTask.id }) {
             tasks[index] = updatedTask
+            saveTasks()
+        }
+    }
+    
+    func deleteTask(_ task: Task) {
+        if let index = tasks.firstIndex(where: { $0.id == task.id }) {
+            tasks.remove(at: index)
             saveTasks()
         }
     }

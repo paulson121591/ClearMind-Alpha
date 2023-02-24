@@ -4,30 +4,37 @@
 //
 //  Created by Paul Sfalanga on 2/22/23.
 //
-
+// Cal view
+// task from message/email
+// Inbox
+// priority is putting high on botton
+// add sort by due date
+//
+//
+//
+//
+//
+//
+//
+//
+//
+import SwiftUI
 import Foundation
 
-enum TaskPriority: Int, CaseIterable, Codable {
-    case low = 1
-    case medium = 2
-    case high = 3
+enum TaskPriority: String, CaseIterable, Codable {
+    case low
+    case medium
+    case high
 
-    enum CodingKeys: String, CodingKey {
-        case rawValue
-    }
-
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        let rawValue = try container.decode(Int.self, forKey: .rawValue)
-        guard let priority = TaskPriority(rawValue: rawValue) else {
-            throw DecodingError.dataCorruptedError(forKey: .rawValue, in: container, debugDescription: "Invalid priority value")
+    var color: Color {
+        switch self {
+        case .low:
+            return .green
+        case .medium:
+            return .orange
+        case .high:
+            return .red
         }
-        self = priority
-    }
-
-    func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(rawValue, forKey: .rawValue)
     }
 }
 
@@ -35,21 +42,32 @@ struct Task: Codable, Identifiable {
     let id: UUID
     var title: String
     var priority: TaskPriority
-    var completed: Bool
+    var completed: Bool {
+        didSet {
+            // Update the task's completion date when it is marked as completed
+            if completed {
+                completionDate = Date()
+            } else {
+                completionDate = nil
+            }
+        }
+    }
     var notes: String?
     var dueDate: Date?
+    var completionDate: Date?
 
-    init(id: UUID = UUID(), title: String, priority: TaskPriority, completed: Bool = false, notes: String? = nil, dueDate: Date? = nil) {
+    init(id: UUID = UUID(), title: String, priority: TaskPriority, completed: Bool = false, notes: String? = nil, dueDate: Date? = nil, completionDate: Date? = nil) {
         self.id = id
         self.title = title
         self.priority = priority
         self.completed = completed
         self.notes = notes
         self.dueDate = dueDate
+        self.completionDate = completionDate
     }
 
     private enum CodingKeys: String, CodingKey {
-        case id, title, priority, completed, notes, dueDate
+        case id, title, priority, completed, notes, dueDate, completionDate
     }
 
     init(from decoder: Decoder) throws {
@@ -60,6 +78,7 @@ struct Task: Codable, Identifiable {
         completed = try container.decode(Bool.self, forKey: .completed)
         notes = try container.decodeIfPresent(String.self, forKey: .notes)
         dueDate = try container.decodeIfPresent(Date.self, forKey: .dueDate)
+        completionDate = try container.decodeIfPresent(Date.self, forKey: .completionDate)
     }
 
     func encode(to encoder: Encoder) throws {
@@ -70,6 +89,7 @@ struct Task: Codable, Identifiable {
         try container.encode(completed, forKey: .completed)
         try container.encodeIfPresent(notes, forKey: .notes)
         try container.encodeIfPresent(dueDate, forKey: .dueDate)
+        try container.encodeIfPresent(completionDate, forKey: .completionDate)
     }
 
     func formattedDueDate() -> String {

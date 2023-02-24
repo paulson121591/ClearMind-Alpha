@@ -6,7 +6,7 @@ class TaskDetailsViewModel: ObservableObject {
     
     var onSave: (() -> Void)?
     
-    private var taskList: TaskList
+    var taskList: TaskList // change access level to public
     
     init(task: Task, taskList: TaskList) {
         self.task = task
@@ -21,8 +21,10 @@ class TaskDetailsViewModel: ObservableObject {
     }
 }
 
+
 struct TaskDetailsView: View {
     @ObservedObject var viewModel: TaskDetailsViewModel
+    @Environment(\.presentationMode) var presentationMode
 
     @State private var showingDueDatePicker = false
 
@@ -71,11 +73,25 @@ struct TaskDetailsView: View {
             }
             .pickerStyle(.segmented)
             .padding(.bottom)
+
+            Spacer()
+
+            Button("Save") {
+                viewModel.saveTask()
+                self.presentationMode.wrappedValue.dismiss()
+            }
+            .frame(maxWidth: .infinity)
+            .padding()
+            .foregroundColor(.white)
+            .background(Color.blue)
+            .cornerRadius(8)
+            .padding(.horizontal)
+
         }
         .padding()
         .navigationBarTitle(viewModel.task.title)
-        .navigationBarItems(trailing: Button("Save") {
-            viewModel.saveTask()
+        .navigationBarItems(trailing: Button("Cancel") {
+            // do nothing, the user should use the back button to go back to the list
         })
     }
 
@@ -92,5 +108,4 @@ struct TaskDetailsView: View {
             set: { viewModel.task.dueDate = $0 }
         )
     }
-
 }
