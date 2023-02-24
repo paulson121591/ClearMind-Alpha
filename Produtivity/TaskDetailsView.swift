@@ -42,26 +42,14 @@ struct TaskDetailsView: View {
             Text("Due Date")
                 .font(.headline)
 
-            Button(action: {
-                showingDueDatePicker = true
-            }, label: {
-                Text(viewModel.task.dueDate == nil ? "Add due date" : DateFormatter.localizedString(from: viewModel.task.dueDate!, dateStyle: .medium, timeStyle: .short))
-            })
-            .padding(.bottom)
-            .sheet(isPresented: $showingDueDatePicker) {
-                DatePicker(
-                    "Due Date",
-                    selection: dueDateBinding,
-                    in: Date()...,
-                    displayedComponents: [.date, .hourAndMinute]
-                )
-                .datePickerStyle(.compact)
-                .labelsHidden()
-                .frame(height: 250)
-                .navigationBarItems(trailing: Button("Done") {
-                    showingDueDatePicker = false
-                })
-            }
+            DatePicker(
+                "Due Date",
+                selection: dueDateBinding,
+                in: Date()...,
+                displayedComponents: [.date, .hourAndMinute]
+            )
+            .datePickerStyle(.compact)
+            .labelsHidden()
 
             Text("Priority")
                 .font(.headline)

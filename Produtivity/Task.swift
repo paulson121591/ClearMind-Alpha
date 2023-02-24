@@ -7,10 +7,10 @@
 // Cal view
 // task from message/email
 // Inbox
-// priority is putting high on botton
-// add sort by due date
+// priority is putting high on botton FIXED
+// add sort by due date DONE
 //
-//
+//Fix the complete button
 //
 //
 //

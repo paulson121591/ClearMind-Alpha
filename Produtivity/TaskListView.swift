@@ -1,5 +1,3 @@
-
-
 import SwiftUI
 
 struct TaskListView: View {
@@ -8,12 +6,17 @@ struct TaskListView: View {
     
     var body: some View {
         VStack {
-            Picker("Sort by", selection: $sortOption) {
+            Menu {
                 ForEach(SortOption.allCases, id: \.self) { option in
-                    Text(option.rawValue.capitalized)
+                    Button(action: {
+                        self.sortOption = option
+                    }) {
+                        Text(option.rawValue.capitalized)
+                    }
                 }
+            } label: {
+                Label("Sort by: \(sortOption.rawValue.capitalized)", systemImage: "arrow.up.arrow.down.circle.fill")
             }
-            .pickerStyle(.segmented)
             .padding(.horizontal)
             
             List {
@@ -43,18 +46,35 @@ struct TaskListView: View {
     func sortedTasks() -> [Task] {
         switch sortOption {
         case .priority:
-            return taskList.tasks.sorted(by: { $0.priority.rawValue > $1.priority.rawValue })
+            return taskList.tasks.sorted { task1, task2 in
+                let priority1 = task1.priority
+                let priority2 = task2.priority
+                
+                if priority1 == .high {
+                    return true
+                } else if priority2 == .high {
+                    return false
+                } else if priority1 == .medium {
+                    return true
+                } else if priority2 == .medium {
+                    return false
+                } else {
+                    return true
+                }
+            }
+        case .dueDate:
+            return taskList.tasks.sorted { task1, task2 in
+                guard let date1 = task1.dueDate, let date2 = task2.dueDate else {
+                    // If either task has no due date, sort it to the end of the list
+                    return task2.dueDate != nil
+                }
+                return date1 < date2
+            }
         }
     }
 }
 
-
-
-
-
-
-
-
 enum SortOption: String, CaseIterable {
     case priority = "Priority"
+    case dueDate = "Due Date"
 }
