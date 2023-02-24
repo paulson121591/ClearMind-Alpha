@@ -47,31 +47,42 @@ struct TaskListView: View {
         switch sortOption {
         case .priority:
             return taskList.tasks.sorted { task1, task2 in
+                let completed1 = task1.completed
+                let completed2 = task2.completed
                 let priority1 = task1.priority
                 let priority2 = task2.priority
-                
-                if priority1 == .high {
-                    return true
-                } else if priority2 == .high {
-                    return false
-                } else if priority1 == .medium {
-                    return true
-                } else if priority2 == .medium {
-                    return false
+
+                if completed1 == completed2 {
+                    if priority1 == .high {
+                        return true
+                    } else if priority2 == .high {
+                        return false
+                    } else if priority1 == .medium {
+                        return true
+                    } else if priority2 == .medium {
+                        return false
+                    } else {
+                        return true
+                    }
                 } else {
-                    return true
+                    return !completed1 && completed2
                 }
             }
         case .dueDate:
             return taskList.tasks.sorted { task1, task2 in
-                guard let date1 = task1.dueDate, let date2 = task2.dueDate else {
-                    // If either task has no due date, sort it to the end of the list
-                    return task2.dueDate != nil
+                if task1.completed != task2.completed {
+                    // If one task is completed and the other is not, move the completed task to the bottom of the list
+                    return !task1.completed
+                } else if let date1 = task1.dueDate, let date2 = task2.dueDate {
+                    return date1 < date2
+                } else {
+                    // If neither task has a due date, sort by priority
+                    return task1.priority.rawValue < task2.priority.rawValue
                 }
-                return date1 < date2
             }
         }
     }
+
 }
 
 enum SortOption: String, CaseIterable {

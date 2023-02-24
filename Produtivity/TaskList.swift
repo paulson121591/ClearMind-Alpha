@@ -26,7 +26,11 @@ class TaskList: ObservableObject {
         let decoder = JSONDecoder()
         if let tasksData = UserDefaults.standard.data(forKey: taskKey),
            let decodedTasks = try? decoder.decode([Task].self, from: tasksData) {
-            tasks = decodedTasks
+            tasks = decodedTasks.map { task in
+                var loadedTask = task
+                loadedTask.completed = task.completed // set completed property to its saved value
+                return loadedTask
+            }
         }
     }
     
@@ -47,15 +51,12 @@ class TaskList: ObservableObject {
         saveTasks()
     }
     
-    func updateTask(_ task: Task, completed: Bool) {
+    func updateTask(_ task: Task, completed: Bool? = nil) {
         if let index = tasks.firstIndex(where: { $0.id == task.id }) {
-            tasks[index].completed = completed
-            saveTasks()
-        }
-    }
-    
-    func updateTask(_ updatedTask: Task) {
-        if let index = tasks.firstIndex(where: { $0.id == updatedTask.id }) {
+            var updatedTask = task
+            if let completed = completed {
+                updatedTask.completed = completed
+            }
             tasks[index] = updatedTask
             saveTasks()
         }
@@ -68,3 +69,4 @@ class TaskList: ObservableObject {
         }
     }
 }
+

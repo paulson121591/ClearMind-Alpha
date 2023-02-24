@@ -19,7 +19,7 @@ struct TaskCell: View {
                 .onTapGesture {
                     withAnimation {
                         isCompleted.toggle()
-                        taskList.updateTask(task)
+                        taskList.updateTask(task, completed: isCompleted)
                     }
                 }
 
@@ -44,6 +44,11 @@ struct TaskCell: View {
                 }
             }
         }
+        .onAppear {
+            isCompleted = task.completed
+        }
+        .onChange(of: task.completed) { newValue in
+            isCompleted = newValue
+        }
     }
 }
-
