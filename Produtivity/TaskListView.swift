@@ -8,11 +8,7 @@ struct TaskListView: View {
         VStack {
             Menu {
                 ForEach(SortOption.allCases, id: \.self) { option in
-                    Button(action: {
-                        self.sortOption = option
-                    }) {
-                        Text(option.rawValue.capitalized)
-                    }
+                    optionButton(for: option)
                 }
             } label: {
                 Label("Sort by: \(sortOption.rawValue.capitalized)", systemImage: "arrow.up.arrow.down.circle.fill")
@@ -39,10 +35,25 @@ struct TaskListView: View {
         }
     }
     
-    func deleteTasks(at offsets: IndexSet) {
-        taskList.tasks.remove(atOffsets: offsets)
+    @ViewBuilder func optionButton(for option: SortOption) -> some View {
+        Button(action: {
+            self.sortOption = option
+        }) {
+            Text(option.rawValue.capitalized)
+        }
     }
     
+    func deleteTasks(at offsets: IndexSet) {
+        let sortedOffsets = offsets.sorted(by: >)
+        let sortedTasks = self.sortedTasks()
+        for index in sortedOffsets {
+            let task = sortedTasks[index]
+            if let taskIndex = taskList.tasks.firstIndex(where: { $0.id == task.id }) {
+                taskList.tasks.remove(at: taskIndex)
+            }
+        }
+    }
+
     func sortedTasks() -> [Task] {
         switch sortOption {
         case .priority:
@@ -82,7 +93,6 @@ struct TaskListView: View {
             }
         }
     }
-
 }
 
 enum SortOption: String, CaseIterable {
