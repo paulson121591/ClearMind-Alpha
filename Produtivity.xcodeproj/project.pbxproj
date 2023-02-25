@@ -12,6 +12,9 @@
 		10AF312529A9D1EA000BC12C /* NewThoughtView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AF312429A9D1EA000BC12C /* NewThoughtView.swift */; };
 		10AF312729A9D301000BC12C /* Thought.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AF312629A9D301000BC12C /* Thought.swift */; };
 		10AF312929A9DDBF000BC12C /* ThoughtDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AF312829A9DDBF000BC12C /* ThoughtDetailsView.swift */; };
+		10AF312B29AA7B78000BC12C /* ThoughtsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AF312A29AA7B78000BC12C /* ThoughtsList.swift */; };
+		10AF312D29AA82E0000BC12C /* ThoughtCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AF312C29AA82E0000BC12C /* ThoughtCell.swift */; };
+		10AF312F29AA8402000BC12C /* ThoughtsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10AF312E29AA8402000BC12C /* ThoughtsListView.swift */; };
 		10C3951429A65A6C00809504 /* ProdutivityApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C3951329A65A6C00809504 /* ProdutivityApp.swift */; };
 		10C3951629A65A6C00809504 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10C3951529A65A6C00809504 /* ContentView.swift */; };
 		10C3951829A65A6D00809504 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10C3951729A65A6D00809504 /* Assets.xcassets */; };
@@ -50,6 +53,9 @@
 		10AF312429A9D1EA000BC12C /* NewThoughtView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewThoughtView.swift; sourceTree = "<group>"; };
 		10AF312629A9D301000BC12C /* Thought.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thought.swift; sourceTree = "<group>"; };
 		10AF312829A9DDBF000BC12C /* ThoughtDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThoughtDetailsView.swift; sourceTree = "<group>"; };
+		10AF312A29AA7B78000BC12C /* ThoughtsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThoughtsList.swift; sourceTree = "<group>"; };
+		10AF312C29AA82E0000BC12C /* ThoughtCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThoughtCell.swift; sourceTree = "<group>"; };
+		10AF312E29AA8402000BC12C /* ThoughtsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThoughtsListView.swift; sourceTree = "<group>"; };
 		10C3951029A65A6C00809504 /* Produtivity.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Produtivity.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		10C3951329A65A6C00809504 /* ProdutivityApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdutivityApp.swift; sourceTree = "<group>"; };
 		10C3951529A65A6C00809504 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -130,6 +136,9 @@
 				10AF312429A9D1EA000BC12C /* NewThoughtView.swift */,
 				10AF312629A9D301000BC12C /* Thought.swift */,
 				10AF312829A9DDBF000BC12C /* ThoughtDetailsView.swift */,
+				10AF312A29AA7B78000BC12C /* ThoughtsList.swift */,
+				10AF312C29AA82E0000BC12C /* ThoughtCell.swift */,
+				10AF312E29AA8402000BC12C /* ThoughtsListView.swift */,
 			);
 			path = Produtivity;
 			sourceTree = "<group>";
@@ -290,13 +299,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				10C3954029A65B1100809504 /* TaskList.swift in Sources */,
+				10AF312B29AA7B78000BC12C /* ThoughtsList.swift in Sources */,
 				10C3954629A65E6E00809504 /* TaskDetailsView.swift in Sources */,
 				10C3954229A65B5200809504 /* NewTaskView.swift in Sources */,
 				10C3951629A65A6C00809504 /* ContentView.swift in Sources */,
+				10AF312D29AA82E0000BC12C /* ThoughtCell.swift in Sources */,
 				10AF312329A9CF93000BC12C /* ThoughtsView.swift in Sources */,
 				10AF312729A9D301000BC12C /* Thought.swift in Sources */,
 				1068DB7E29A823EE00265671 /* TaskCell.swift in Sources */,
 				10AF312929A9DDBF000BC12C /* ThoughtDetailsView.swift in Sources */,
+				10AF312F29AA8402000BC12C /* ThoughtsListView.swift in Sources */,
 				10C3953E29A65AB400809504 /* Task.swift in Sources */,
 				10C3951429A65A6C00809504 /* ProdutivityApp.swift in Sources */,
 				10C3954429A65CAF00809504 /* TaskListView.swift in Sources */,
@@ -462,6 +474,7 @@
 				DEVELOPMENT_TEAM = 4DK8232953;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -492,6 +505,7 @@
 				DEVELOPMENT_TEAM = 4DK8232953;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
