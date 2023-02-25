@@ -6,12 +6,23 @@ struct TaskListView: View {
     
     var body: some View {
         VStack {
-            Menu {
-                ForEach(SortOption.allCases, id: \.self) { option in
-                    optionButton(for: option)
-                }
-            } label: {
-                Label("Sort by: \(sortOption.rawValue.capitalized)", systemImage: "arrow.up.arrow.down.circle.fill")
+            ZStack {
+                LinearGradient(gradient: Gradient(colors: [.blue, .purple]), startPoint: .leading, endPoint: .trailing)
+                    .mask(Text("ClearMind")
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
+                            .padding(.top)
+                    )
+            }
+            .frame(maxWidth: .infinity, maxHeight: 100)
+            HStack {
+                optionButton(for: .priority, image: "exclamationmark.triangle.fill")
+                    .foregroundColor(sortOption == .priority ? .accentColor : .primary)
+                
+                Spacer()
+                
+                optionButton(for: .dueDate, image: "calendar")
+                    .foregroundColor(sortOption == .dueDate ? .accentColor : .primary)
             }
             .padding(.horizontal)
             
@@ -21,8 +32,8 @@ struct TaskListView: View {
                         destination: TaskDetailsView(viewModel: TaskDetailsViewModel(task: task, taskList: taskList))
                     ) {
                         TaskCell(task: task, taskList: taskList)
+                            .foregroundColor(task.completed ? .secondary : .primary)
                     }
-                    .foregroundColor(task.completed ? .gray : .primary)
                     .onAppear {
                         print("Task details view appeared for task: \(task.title)")
                     }
@@ -35,13 +46,16 @@ struct TaskListView: View {
         }
     }
     
-    @ViewBuilder func optionButton(for option: SortOption) -> some View {
+    @ViewBuilder func optionButton(for option: SortOption, image: String) -> some View {
         Button(action: {
             self.sortOption = option
         }) {
-            Text(option.rawValue.capitalized)
+            Image(systemName: image)
+                .font(.title)
+                .frame(width: 40, height: 40)
         }
     }
+    
     
     func deleteTasks(at offsets: IndexSet) {
         let sortedOffsets = offsets.sorted(by: >)
@@ -97,5 +111,6 @@ struct TaskListView: View {
 
 enum SortOption: String, CaseIterable {
     case priority = "Priority"
-    case dueDate = "Due Date"
+    case dueDate
+
 }

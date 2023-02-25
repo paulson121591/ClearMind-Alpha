@@ -90,6 +90,7 @@ struct Task: Codable, Identifiable {
         try container.encodeIfPresent(notes, forKey: .notes)
         try container.encodeIfPresent(dueDate, forKey: .dueDate)
         try container.encodeIfPresent(completionDate, forKey: .completionDate)
+        print("that encode")
     }
 
     func formattedDueDate() -> String {

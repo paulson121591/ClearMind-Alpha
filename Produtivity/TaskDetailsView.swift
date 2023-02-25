@@ -18,6 +18,7 @@ class TaskDetailsViewModel: ObservableObject {
         task.priority = selectedPriority
         taskList.updateTask(task)
         onSave?()
+        print("thats save det")
     }
 }
 
@@ -29,7 +30,7 @@ struct TaskDetailsView: View {
     @State private var showingDueDatePicker = false
 
     var body: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 16) {
             Text("Task Notes")
                 .font(.headline)
                 .padding(.top)
@@ -50,16 +51,14 @@ struct TaskDetailsView: View {
             )
             .datePickerStyle(.compact)
             .labelsHidden()
-
-            Text("Priority")
-                .font(.headline)
+            .padding(.bottom)
 
             Picker(selection: $viewModel.selectedPriority, label: Text("Priority")) {
                 ForEach(TaskPriority.allCases, id: \.self) { priority in
                     Text("\(priority.rawValue)")
                 }
             }
-            .pickerStyle(.segmented)
+            .pickerStyle(SegmentedPickerStyle())
             .padding(.bottom)
 
             Spacer()
@@ -71,12 +70,11 @@ struct TaskDetailsView: View {
             .frame(maxWidth: .infinity)
             .padding()
             .foregroundColor(.white)
-            .background(Color.blue)
+            .background(Color.green)
             .cornerRadius(8)
-            .padding(.horizontal)
 
         }
-        .padding()
+        .padding(16)
         .navigationBarTitle(viewModel.task.title)
         .navigationBarItems(trailing: Button("Cancel") {
             // do nothing, the user should use the back button to go back to the list
